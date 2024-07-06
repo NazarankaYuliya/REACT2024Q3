@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { Character } from '../types/Character';
 import CharacterCard from './CharacterCard';
+import NotFound from './NotFound';
 
 interface ResultsProps {
   results: Character[];
@@ -16,11 +17,7 @@ class Results extends Component<ResultsProps> {
     }
 
     if (results.length === 0) {
-      return (
-        <div className="results">
-          <p className="not-found">No characters found.</p>
-        </div>
-      );
+      return <NotFound />;
     }
 
     return (
