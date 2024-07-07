@@ -16,7 +16,7 @@ class ErrorButton extends Component {
 
     return (
       <button className="error-button" onClick={this.handleClick}>
-        Trigger Error
+        Portal gun, go!
       </button>
     );
   }

@@ -26,9 +26,15 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     if (this.state.hasError) {
       return (
         <div className="error-boundary">
-          <h1 className="error-message">Something went wrong. Try again</h1>;
+          <h1 className="error-message">
+            Wubba Lubba Dub Dub! Looks like something went wrong in the
+            multiverse.
+          </h1>
+          <p className="error-suggestion">
+            Don't worry, we'll get Schwifty and try again!
+          </p>
           <button className="refresh-button" onClick={this.handleRefresh}>
-            Refresh
+            Get Schwifty Again
           </button>
         </div>
       );

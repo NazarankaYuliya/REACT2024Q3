@@ -3,8 +3,8 @@ import Header from './components/Header';
 import Search from './components/Search';
 import Results from './components/Results';
 import ErrorBoundary from './components/ErrorBoundary';
-import ErrorButton from './components/ErrorButton';
 import { Character } from './types/Character';
+import './App.css';
 
 class App extends Component {
   state = {
@@ -26,9 +26,8 @@ class App extends Component {
 
   render() {
     return (
-      <>
+      <div className="app">
         <ErrorBoundary>
-          <ErrorButton />
           <Header />
           <Search
             updateResults={this.updateResults}
@@ -39,7 +38,7 @@ class App extends Component {
             isLoading={this.state.isLoading}
           />
         </ErrorBoundary>
-      </>
+      </div>
     );
   }
 }

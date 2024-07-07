@@ -5,7 +5,7 @@ export const fetchItems = async (
 ): Promise<Character[]> => {
   const url = searchTerm
     ? `https://rickandmortyapi.com/api/character/?name=${searchTerm}`
-    : 'https://rickandmortyapi.com/api/character';
+    : 'https://rickandmortyapi.com/api/character/?page=1';
 
   try {
     const response = await fetch(url);
