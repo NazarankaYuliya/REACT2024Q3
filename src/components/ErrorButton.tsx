@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const ErrorButton = () => {
+function ErrorButton() {
   const [hasError, setHasError] = useState(false);
 
   const handleClick = () => {
@@ -16,6 +16,6 @@ const ErrorButton = () => {
       Portal gun, go!
     </button>
   );
-};
+}
 
 export default ErrorButton;

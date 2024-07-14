@@ -14,10 +14,7 @@ export const fetchItems = async (
   searchTerm: string = '',
   page: number,
 ): Promise<FetchItemsResponse> => {
-  const url = searchTerm
-    ? `https://rickandmortyapi.com/api/character/?name=${searchTerm}&page=${page}`
-    : `https://rickandmortyapi.com/api/character/?page=${page}`;
-
+  const url = `https://rickandmortyapi.com/api/character/?name=${searchTerm}&page=${page}`;
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -47,5 +44,23 @@ export const fetchItems = async (
       results: [],
       info: { count: 0, pages: 0, next: null, prev: null },
     };
+  }
+};
+
+export const fetchCharacterData = async (id: number): Promise<Character> => {
+  try {
+    const response = await fetch(
+      `https://rickandmortyapi.com/api/character/${id}`,
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('An error occurred while fetching character data:', error);
+    throw error;
   }
 };

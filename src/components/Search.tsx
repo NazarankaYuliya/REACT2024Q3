@@ -2,7 +2,6 @@ import { Character } from '../types/Character';
 import { fetchItems } from '../services/apiService';
 import useSearchQuery from '../hooks/useSearchQuery';
 import { useEffect, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 interface SearchProps {
   updateResults: (results: Character[]) => void;
@@ -19,7 +18,6 @@ const Search: React.FC<SearchProps> = ({
   setCurrentPage,
   setTotalPages,
 }) => {
-  const navigate = useNavigate();
   const [searchItem, setSearchItem] = useSearchQuery();
 
   const handleSearch = useCallback(
@@ -46,14 +44,12 @@ const Search: React.FC<SearchProps> = ({
 
   const handleButtonSearch = () => {
     setCurrentPage(1);
-    navigate(`?search=${searchItem}&page=1`);
     handleSearch(1);
   };
 
   useEffect(() => {
-    navigate(`?page=${currentPage}`);
     handleSearch(currentPage);
-  }, [currentPage, navigate]);
+  }, [currentPage]);
 
   return (
     <div className="search">
