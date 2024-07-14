@@ -1,64 +1,71 @@
-import { ChangeEvent, Component } from 'react';
 import { Character } from '../types/Character';
 import { fetchItems } from '../services/apiService';
+import useSearchQuery from '../hooks/useSearchQuery';
+import { useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface SearchProps {
   updateResults: (results: Character[]) => void;
   setLoading: (isLoading: boolean) => void;
+  currentPage: number;
+  setCurrentPage: (currentPage: number) => void;
+  setTotalPages: (totalPages: number) => void;
 }
 
-interface SearchState {
-  searchItem: string;
-  isLoading: boolean;
-}
+const Search: React.FC<SearchProps> = ({
+  updateResults,
+  setLoading,
+  currentPage,
+  setCurrentPage,
+  setTotalPages,
+}) => {
+  const navigate = useNavigate();
+  const [searchItem, setSearchItem] = useSearchQuery();
 
-class Search extends Component<SearchProps, SearchState> {
-  constructor(props: SearchProps) {
-    super(props);
-    this.state = {
-      searchItem: localStorage.getItem('searchTerm') || '',
-      isLoading: false,
-    };
-  }
+  const handleSearch = useCallback(
+    async (page: number) => {
+      setLoading(true);
 
-  componentDidMount() {
-    this.handleSearch();
-  }
+      try {
+        const { results, info } = await fetchItems(searchItem, page);
+        updateResults(results);
+        setTotalPages(info.pages);
+      } catch (error) {
+        updateResults([]);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [searchItem, setLoading, updateResults, setTotalPages],
+  );
 
-  handleSearch = async () => {
-    this.props.setLoading(true);
-    const trimmedSearchItem = this.state.searchItem.trim();
-
-    try {
-      const data = await fetchItems(trimmedSearchItem);
-      this.props.updateResults(data);
-      localStorage.setItem('searchTerm', trimmedSearchItem);
-    } catch (error) {
-      this.props.updateResults([]);
-    } finally {
-      this.props.setLoading(false);
-    }
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const trimmedSearchItem = e.target.value.trim();
+    setSearchItem(trimmedSearchItem);
   };
 
-  handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    this.setState({ searchItem: e.target.value });
+  const handleButtonSearch = () => {
+    setCurrentPage(1);
+    navigate(`?search=${searchItem}&page=1`);
+    handleSearch(1);
   };
 
-  render() {
-    return (
-      <div className="search">
-        <input
-          type="text"
-          placeholder="Enter character name"
-          value={this.state.searchItem}
-          onChange={this.handleInputChange}
-        />
-        <button onClick={this.handleSearch} disabled={this.state.isLoading}>
-          Search
-        </button>
-      </div>
-    );
-  }
-}
+  useEffect(() => {
+    navigate(`?page=${currentPage}`);
+    handleSearch(currentPage);
+  }, [currentPage, navigate]);
+
+  return (
+    <div className="search">
+      <input
+        type="text"
+        placeholder="Enter character name"
+        value={searchItem}
+        onChange={handleInputChange}
+      />
+      <button onClick={handleButtonSearch}>Search</button>
+    </div>
+  );
+};
 
 export default Search;
