@@ -2,6 +2,7 @@ import { Character } from '../types/Character';
 import { fetchItems } from '../services/apiService';
 import useSearchQuery from '../hooks/useSearchQuery';
 import { useEffect, useCallback } from 'react';
+import ErrorButton from './ErrorButton';
 
 interface SearchProps {
   updateResults: (results: Character[]) => void;
@@ -53,6 +54,7 @@ const Search: React.FC<SearchProps> = ({
 
   return (
     <div className="search">
+      <ErrorButton />
       <input
         type="text"
         placeholder="Enter character name"

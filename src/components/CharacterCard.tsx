@@ -23,7 +23,6 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
       <p>Gender: {character.gender}</p>
       <p>Origin: {character.origin.name}</p>
       <p>Location: {character.location.name}</p>
-      <button></button>
     </div>
   );
 };

@@ -1,10 +1,41 @@
-/* General styles for the app */
+:root {
+  --primary-bg-color-light: #fff874;
+  --secondary-bg-color-light: #24325f;
+  --accent-color-light: #f675da;
+  --error-color-light: #ff0000;
+
+  --primary-bg-color-dark: #1c1c1c;
+  --secondary-bg-color-dark: #3d373c;
+  --accent-color-dark: #b7e4f9;
+  --error-color-dark: #ff0000;
+}
+
+.theme-light {
+  --primary-bg-color: var(--primary-bg-color-light);
+  --secondary-bg-color: var(--secondary-bg-color-light);
+  --accent-color: var(--accent-color-light);
+  --error-color: var(--error-color-light);
+}
+
+.theme-dark {
+  --primary-bg-color: var(--primary-bg-color-dark);
+  --secondary-bg-color: var(--secondary-bg-color-dark);
+  --accent-color: var(--accent-color-dark);
+  --error-color: var(--error-color-dark);
+}
+
 .app {
+  background-color: var(--primary-bg-color);
+}
+
+/* General styles for the app */
+.main-container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #000;
-  color: #f0f0f0;
   min-height: 100vh;
   padding: 20px;
 }
@@ -13,7 +44,7 @@
 .header {
   width: 100%;
   padding: 20px;
-  background-color: #000;
+  background-color: var(--primary-bg-color);
   border-radius: 10px;
   margin-bottom: 20px;
 }
@@ -31,13 +62,13 @@
 .site-title {
   font-size: 36px;
   margin: 0;
-  color: #ffcc00;
+  color: var(--accent-color);
 }
 
 .subtitle {
   font-size: 18px;
   margin: 0;
-  color: #ffcc00;
+  color: var(--accent-color);
   margin-bottom: 10px;
 }
 
@@ -49,17 +80,18 @@
 }
 
 .portal-image {
-  width: 40%;
-  height: auto;
+  width: 100%;
+  max-height: 300px;
 }
 
 /* Styles for the ErrorButton component */
 .error-button {
+  max-width: 20%;
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #ffcc00;
-  color: #1c1c1c;
-  border: 2px solid #ffcc00;
+  background-color: var(--secondary-bg-color);
+  color: var(--accent-color);
+  border: 2px solid var(--accent-color);
   border-radius: 4px;
   cursor: pointer;
   transition:
@@ -68,8 +100,8 @@
 }
 
 .error-button:hover {
-  background-color: #1c1c1c;
-  color: #ffcc00;
+  background-color: var(--accent-color);
+  color: var(--secondary-bg-color);
 }
 
 /* Styles for the ErrorBoundary component */
@@ -81,26 +113,26 @@
   gap: 20px;
   text-align: center;
   padding: 20px;
-  background-color: #ffcc00;
+  background-color: var(--secondary-bg-color);
   border-radius: 10px;
 }
 
 .error-message {
   font-size: 24px;
-  color: #ff0000;
+  color: var(--error-color);
 }
 
 .error-suggestion {
   font-size: 18px;
-  color: #1c1c1c;
+  color: var(--accent-color);
 }
 
 .refresh-button {
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #1c1c1c;
-  color: #ffcc00;
-  border: 2px solid #1c1c1c;
+  background-color: var(--secondary-bg-color);
+  color: var(--accent-color);
+  border: 2px solid var(--accent-color);
   border-radius: 4px;
   cursor: pointer;
   transition:
@@ -109,12 +141,11 @@
 }
 
 .refresh-button:hover {
-  background-color: #ffcc00;
-  color: #1c1c1c;
+  background-color: var(--accent-color);
+  color: var(--secondary-bg-color);
 }
 
 /* Styles for the NotFound component */
-
 .not-found {
   display: flex;
   flex-direction: column;
@@ -122,28 +153,28 @@
   justify-content: center;
   align-items: center;
   padding: 20px;
-  background-color: #00bfff;
+  background-color: var(--secondary-bg-color);
   border-radius: 10px;
 }
 
 .not-found-message {
   font-size: 24px;
-  color: #ff0000;
+  color: var(--error-color);
   text-align: center;
 }
 
 .not-found-suggestion {
   font-size: 18px;
-  color: #1c1c1c;
+  color: var(--accent-color);
   text-align: center;
 }
 
 .return-button {
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #1c1c1c;
-  color: #ffcc00;
-  border: 2px solid #1c1c1c;
+  background-color: var(--secondary-bg-color);
+  color: var(--accent-color);
+  border: 2px solid var(--accent-color);
   border-radius: 4px;
   cursor: pointer;
   transition:
@@ -154,8 +185,8 @@
 }
 
 .return-button:hover {
-  background-color: #ffcc00;
-  color: #1c1c1c;
+  background-color: var(--accent-color);
+  color: var(--secondary-bg-color);
 }
 
 /* Styles for the Search component */
@@ -165,7 +196,8 @@
   justify-content: center;
   width: 100%;
   padding: 20px;
-  background-color: #ffcc00;
+  gap: 10px;
+  background-color: var(--secondary-bg-color);
   border-radius: 10px;
   margin-bottom: 20px;
 }
@@ -173,19 +205,19 @@
 .search input {
   padding: 10px;
   font-size: 16px;
-  border: 2px solid #1c1c1c;
+  border: 2px solid var(--accent-color);
   border-radius: 4px;
-  margin-right: 10px;
   flex-grow: 1;
-  max-width: 300px;
+  max-width: 50%;
 }
 
 .search button {
+  max-width: 20%;
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #1c1c1c;
-  color: #ffcc00;
-  border: 2px solid #1c1c1c;
+  background-color: var(--secondary-bg-color);
+  color: var(--accent-color);
+  border: 2px solid var(--accent-color);
   border-radius: 4px;
   cursor: pointer;
   transition:
@@ -199,8 +231,8 @@
 }
 
 .search button:hover:not(:disabled) {
-  background-color: #ffcc00;
-  color: #1c1c1c;
+  background-color: var(--accent-color);
+  color: var(--secondary-bg-color);
 }
 
 /* Styles for the Results component */
@@ -208,7 +240,7 @@
   display: flex;
   width: 100%;
   padding: 20px;
-  background-color: #00bfff;
+  background-color: var(--secondary-bg-color);
   border-radius: 10px;
 }
 
@@ -225,8 +257,8 @@
 
 /* Styles for the CharacterCard component */
 .character-card {
-  background-color: #ffcc00;
-  border: 2px solid #1c1c1c;
+  background-color: var(--secondary-bg-color);
+  border: 2px solid var(--accent-color);
   border-radius: 10px;
   margin: 10px;
   padding: 20px;
@@ -249,13 +281,13 @@
 .character-card h2 {
   font-size: 20px;
   margin: 10px 0;
-  color: #1c1c1c;
+  color: var(--accent-color);
 }
 
 .character-card p {
   font-size: 16px;
   margin: 5px 0;
-  color: #1c1c1c;
+  color: var(--accent-color);
 }
 
 .character-card:hover {
@@ -266,13 +298,7 @@
 /* Styles for the Loading component */
 .loading {
   font-size: 24px;
-  color: #00bfff;
-}
-
-/* Styles for the NotFound component */
-.not-found {
-  font-size: 24px;
-  color: #ff0000;
+  color: var(--accent-color);
 }
 
 /* Styles for the Pagination component */
@@ -282,14 +308,15 @@
   align-items: center;
   gap: 10px;
   padding: 10px;
+  color: var(--accent-color);
 }
 
 .pagination button {
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #1c1c1c;
-  color: #ffcc00;
-  border: 2px solid #1c1c1c;
+  background-color: var(--secondary-bg-color);
+  color: var(--accent-color);
+  border: 2px solid var(--accent-color);
   border-radius: 4px;
   cursor: pointer;
   transition:
@@ -300,17 +327,13 @@
 .pagination button:disabled {
   background-color: #ccc;
   color: #666;
+  border-color: #666;
   cursor: not-allowed;
 }
 
 .pagination button:hover:not(:disabled) {
-  background-color: #ffcc00;
-  color: #1c1c1c;
-}
-
-.pagination p {
-  font-size: 16px;
-  color: #f0f0f0;
+  background-color: var(--accent-color);
+  color: var(--secondary-bg-color);
 }
 
 /* Styles for the CharacterDetails component */
@@ -320,29 +343,25 @@
   justify-content: center;
   align-items: center;
   padding: 20px;
-  background-color: #000;
-  border-radius: 10px;
-  margin-top: 20px;
 }
 
 .character-details {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #ffcc00;
   padding: 20px;
+  background-color: var(--accent-color);
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: relative;
-  max-width: 600px;
-  width: 100%;
 }
 
 .close-button {
   background-color: transparent;
   border: none;
-  font-size: 24px;
-  color: #1c1c1c;
+  font-size: 28px;
+  color: var(--secondary-bg-color);
   position: absolute;
   top: 10px;
   right: 10px;
@@ -350,27 +369,24 @@
 }
 
 .close-button:hover {
-  color: #ff0000;
+  color: var(--error-color);
 }
 
-.detail-card {
-  text-align: center;
+/* Styles for Theme component */
+.theme-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: var(--secondary-bg-color);
+  color: var(--accent-color);
+  border: 2px solid var(--accent-color);
+  border-radius: 4px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
 }
 
-.detail-image {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  margin-bottom: 20px;
-}
-
-.detail-name {
-  font-size: 24px;
-  color: #1c1c1c;
-}
-
-.detail-info {
-  font-size: 18px;
-  color: #1c1c1c;
-  margin: 5px 0;
+.theme-button:hover {
+  background-color: var(--accent-color);
+  color: var(--secondary-bg-color);
 }

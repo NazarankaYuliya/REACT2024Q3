@@ -8,6 +8,7 @@ import {
 import HomePage from './pages/HomePage';
 import PageNotFound from './components/PageNotFound';
 import CharacterDetails from './components/CharacterDetails';
+import { ThemeProvider } from './context/ThemeProvider';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -22,9 +23,11 @@ const router = createBrowserRouter(
 
 const App = () => {
   return (
-    <div className="app">
-      <RouterProvider router={router} />
-    </div>
+    <ThemeProvider>
+      <div className="main-container">
+        <RouterProvider router={router} />
+      </div>
+    </ThemeProvider>
   );
 };
 
